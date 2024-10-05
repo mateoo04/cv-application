@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../styles/EditForm.css';
 
 export default function EditForm({
   name,
@@ -6,9 +7,11 @@ export default function EditForm({
   email,
   phoneNum,
   handleNameChange,
+  handleSurnameChange,
+  handleEmailChange,
+  handlePhoneNumChange,
+  onSubmit,
 }) {
-  console.log(name);
-
   const [editName, setEditName] = useState(name);
   const [editSurname, setEditSurname] = useState(surname);
   const [editEmail, setEditEmail] = useState(email);
@@ -17,16 +20,31 @@ export default function EditForm({
   function handleEditNameChange(e) {
     setEditName(e.target.value);
   }
+  function handleEditSurnameChange(e) {
+    setEditSurname(e.target.value);
+  }
+  function handleEditEmailChange(e) {
+    setEditEmail(e.target.value);
+  }
+  function handleEditPhoneNumChange(e) {
+    setEditPhoneNum(e.target.value);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
 
     if (name !== editName) handleNameChange(editName);
+    if (surname !== editSurname) handleSurnameChange(editSurname);
+    if (email !== editEmail) handleEmailChange(editEmail);
+    if (phoneNum !== editPhoneNum) handlePhoneNumChange(editPhoneNum);
+
+    onSubmit();
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <label for='name'>
+      <label htmlFor='name'>
+        Name
         <input
           type='text'
           id='name'
@@ -34,14 +52,32 @@ export default function EditForm({
           onChange={handleEditNameChange}
         />
       </label>
-      <label for='surname'>
-        <input type='text' id='surname' value={editSurname} />
+      <label htmlFor='surname'>
+        Surname
+        <input
+          type='text'
+          id='surname'
+          value={editSurname}
+          onChange={handleEditSurnameChange}
+        />
       </label>
-      <label for='email'>
-        <input type='email' id='email' value={editEmail} />
+      <label htmlFor='email'>
+        Email
+        <input
+          type='email'
+          id='email'
+          value={editEmail}
+          onChange={handleEditEmailChange}
+        />
       </label>
-      <label for='phoneNum'>
-        <input type='tel' id='phoneNum' value={editPhoneNum} />
+      <label htmlFor='phoneNum'>
+        Phone number
+        <input
+          type='tel'
+          id='phoneNum'
+          value={editPhoneNum}
+          onChange={handleEditPhoneNumChange}
+        />
       </label>
 
       <input type='submit' value='SAVE CHANGES' />
