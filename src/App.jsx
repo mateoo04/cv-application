@@ -16,15 +16,41 @@ function App() {
     {
       schoolName: 'Dowing High School',
       titleOfStudy: 'Mathematical High School',
-      startDate: '2019-09-01',
-      endDate: '2023-06-30',
+      startDate: '2014-09-01',
+      endDate: '2017-06-30',
       id: 0,
     },
     {
       schoolName: 'Technical University of Zagreb',
       titleOfStudy: "Computer Science Bacherlor's",
-      startDate: '2023-10-01',
-      endDate: '2026-07-15',
+      startDate: '2017-10-01',
+      endDate: '2021-07-15',
+      id: 1,
+    },
+  ]);
+
+  const [workExperience, setWorkExperience] = useState([
+    {
+      companyName: 'Metadream',
+      position: 'Front-end developer',
+      mainResponsibilities: [
+        'Optimize code and assets to ensure fast load times and smooth performance',
+        'Utilize front-end frameworks like React to create scalable and reusable UI components',
+        'Write clean, efficient code to implement new features and functionalities based on project requirements',
+      ],
+      startDate: '2021-08-01',
+      endDate: '2023-01-31',
+      id: 0,
+    },
+    {
+      companyName: 'Concurrent',
+      position: 'Android Developer',
+      mainResponsibilities: [
+        'Translate designs and wireframes into high quality code',
+        'Identify and correct bottlenecks and fix bugs',
+        'Ensure the best possible performance, quality, and responsiveness of the application',
+      ],
+      startDate: '2023-02-01',
       id: 1,
     },
   ]);
@@ -56,6 +82,7 @@ function App() {
         email={email}
         phoneNum={phoneNum}
         education={education}
+        workExperience={workExperience}
       />
     </>
   );
