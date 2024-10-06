@@ -46,6 +46,8 @@ function EditEducationEntry({ educationEntry, handleEditEducationChange }) {
         <input
           type='date'
           id='start-date'
+          min='1900-01-01'
+          max='2100-12-31'
           value={startDate}
           onChange={(e) =>
             handleEditEducationChange(id, { startDate: e.target.value })
@@ -56,6 +58,8 @@ function EditEducationEntry({ educationEntry, handleEditEducationChange }) {
         <input
           type='date'
           id='end-date'
+          min='1900-01-01'
+          max='2100-12-31'
           value={endDate}
           onChange={(e) =>
             handleEditEducationChange(id, { endDate: e.target.value })
@@ -106,6 +110,19 @@ export default function EditForm({
         } else return entry;
       })
     );
+  }
+
+  function appendEducationEntry() {
+    setEditEducation([
+      ...editEducation,
+      {
+        schoolName: '',
+        titleOfStudy: '',
+        startDate: '',
+        endDate: '',
+        id: editEducation.length,
+      },
+    ]);
   }
 
   function handleSubmit(e) {
@@ -174,6 +191,9 @@ export default function EditForm({
             );
           })}
         </div>
+        <button type='button' value='' onClick={() => appendEducationEntry()}>
+          ADD EDUCATION ENTRY
+        </button>
 
         <input type='submit' value='SAVE CHANGES' />
       </form>
