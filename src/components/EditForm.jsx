@@ -35,7 +35,7 @@ export default function EditForm({
   handlePhoneNumChange,
   handleEducationChange,
   handleWorkExperienceChange,
-  onSubmit,
+  onDone,
 }) {
   const [modifiedName, setModifiedName] = useState(name);
   const [modifiedSurname, setModifiedSurname] = useState(surname);
@@ -118,7 +118,7 @@ export default function EditForm({
       handleWorkExperienceChange(modifiedWorkExperience);
     }
 
-    onSubmit();
+    onDone();
   }
 
   return (
@@ -200,6 +200,9 @@ export default function EditForm({
         </button>
 
         <input type='submit' value='SAVE CHANGES' />
+        <button type='button' onClick={onDone}>
+          CANCEL
+        </button>
       </form>
     </>
   );

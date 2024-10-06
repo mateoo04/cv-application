@@ -37,6 +37,7 @@ export default function EditWorkExperienceEntry({
   return (
     <>
       <label htmlFor='company-name'>
+        Company name
         <input
           type='text'
           id='company-name'
@@ -49,6 +50,7 @@ export default function EditWorkExperienceEntry({
         />
       </label>
       <label htmlFor='position'>
+        Position
         <input
           type='text'
           id='position'
@@ -82,6 +84,7 @@ export default function EditWorkExperienceEntry({
         ADD
       </button>
       <label htmlFor='start-date'>
+        Start date
         <input
           type='date'
           id='start-date'
@@ -96,6 +99,7 @@ export default function EditWorkExperienceEntry({
         />
       </label>
       <label htmlFor='end-date'>
+        End date
         <input
           type='date'
           id='end-date'

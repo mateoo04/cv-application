@@ -1,3 +1,14 @@
+import { format } from 'date-fns';
+
+function formatDate(dateString) {
+  if (!dateString || dateString.length < 10) return '';
+
+  const [year, month, day] = dateString.split('-');
+  const date = new Date(year, month, day);
+
+  return format(date, 'do MMMM y');
+}
+
 export default function CV({
   fullName,
   email,
@@ -17,7 +28,11 @@ export default function CV({
             <div key={'education-list-item-' + entry.id}>
               <h3>{entry.schoolName}</h3>
               <p>{entry.titleOfStudy}</p>
-              <p>{entry.startDate + ' - ' + entry.endDate}</p>
+              <p>
+                {formatDate(entry.startDate) +
+                  ' - ' +
+                  formatDate(entry.endDate)}
+              </p>
             </div>
           );
         })}
@@ -29,6 +44,11 @@ export default function CV({
             <div key={'work-experience-list-item-' + entry.id}>
               <h3>{entry.position}</h3>
               <p>{entry.companyName}</p>
+              <p>
+                {formatDate(entry.startDate) +
+                  ' - ' +
+                  formatDate(entry.endDate)}
+              </p>
               {entry.mainResponsibilities.length !== 0 && (
                 <>
                   <p>Responsibilities</p>

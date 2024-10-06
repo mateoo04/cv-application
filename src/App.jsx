@@ -97,7 +97,7 @@ function App() {
           handlePhoneNumChange={setPhoneNum}
           handleEducationChange={setEducation}
           handleWorkExperienceChange={setWorkExperience}
-          onSubmit={() => setIsEditing(!isEditing)}
+          onDone={() => setIsEditing(!isEditing)}
         />
       </>
     );

@@ -7,6 +7,7 @@ export default function EditEducationEntry({
   return (
     <>
       <label htmlFor='school-name'>
+        School name
         <input
           type='text'
           id='school-name'
@@ -17,6 +18,7 @@ export default function EditEducationEntry({
         />
       </label>
       <label htmlFor='study-title'>
+        Title of Study
         <input
           type='text'
           id='study-title'
@@ -27,6 +29,7 @@ export default function EditEducationEntry({
         />
       </label>
       <label htmlFor='start-date'>
+        Start date
         <input
           type='date'
           id='start-date'
@@ -39,6 +42,7 @@ export default function EditEducationEntry({
         />
       </label>
       <label htmlFor='end-date'>
+        End date
         <input
           type='date'
           id='end-date'
