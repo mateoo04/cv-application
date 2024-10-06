@@ -26,17 +26,21 @@ export default function CV({
       <div className='work-experience-list'>
         {workExperience.map((entry) => {
           return (
-            <div key={'work-experience-list-item' + entry.id}>
+            <div key={'work-experience-list-item-' + entry.id}>
               <h3>{entry.position}</h3>
               <p>{entry.companyName}</p>
               {entry.mainResponsibilities.length !== 0 && (
                 <>
                   <p>Responsibilities</p>
                   <ul>
-                    {entry.mainResponsibilities.map((responsibility, index) => {
+                    {entry.mainResponsibilities.map((responsibility) => {
                       return (
-                        <li key={'responsibility-item-' + index}>
-                          {responsibility}
+                        <li
+                          key={
+                            'responsibilities-list-item-' + responsibility.id
+                          }
+                        >
+                          {responsibility.value}
                         </li>
                       );
                     })}

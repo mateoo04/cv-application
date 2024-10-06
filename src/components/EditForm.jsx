@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import EditEducationEntry from './EditEducationEntry.jsx';
+import EditWorkExperienceEntry from './EditWorkExperienceEntry.jsx';
 import '../styles/EditForm.css';
 
 function deepEquality(firstArray, secondArray) {
@@ -10,64 +12,14 @@ function deepEquality(firstArray, secondArray) {
       Object.keys(item).length !== Object.keys(secondArray[index]).length
     )
       return false;
-
-    return Object.keys(item).every(
-      (key) => item[key] === secondArray[index][key]
-    );
+    return Object.keys(item).every((key) => {
+      if (Array.isArray(item)) {
+        return firstArray.every((item, index) => {
+          return item === secondArray[index];
+        });
+      } else return item[key] === secondArray[index][key];
+    });
   });
-}
-
-function EditEducationEntry({ educationEntry, handleEditEducationChange }) {
-  const { schoolName, titleOfStudy, startDate, endDate, id } = educationEntry;
-
-  return (
-    <>
-      <label htmlFor='school-name'>
-        <input
-          type='text'
-          id='school-name'
-          value={schoolName}
-          onChange={(e) =>
-            handleEditEducationChange(id, { schoolName: e.target.value })
-          }
-        />
-      </label>
-      <label htmlFor='study-title'>
-        <input
-          type='text'
-          id='study-title'
-          value={titleOfStudy}
-          onChange={(e) =>
-            handleEditEducationChange(id, { titleOfStudy: e.target.value })
-          }
-        />
-      </label>
-      <label htmlFor='start-date'>
-        <input
-          type='date'
-          id='start-date'
-          min='1900-01-01'
-          max='2100-12-31'
-          value={startDate}
-          onChange={(e) =>
-            handleEditEducationChange(id, { startDate: e.target.value })
-          }
-        />
-      </label>
-      <label htmlFor='end-date'>
-        <input
-          type='date'
-          id='end-date'
-          min='1900-01-01'
-          max='2100-12-31'
-          value={endDate}
-          onChange={(e) =>
-            handleEditEducationChange(id, { endDate: e.target.value })
-          }
-        />
-      </label>
-    </>
-  );
 }
 
 export default function EditForm({
@@ -76,35 +28,39 @@ export default function EditForm({
   email,
   phoneNum,
   education,
+  workExperience,
   handleNameChange,
   handleSurnameChange,
   handleEmailChange,
   handlePhoneNumChange,
   handleEducationChange,
+  handleWorkExperienceChange,
   onSubmit,
 }) {
-  const [editName, setEditName] = useState(name);
-  const [editSurname, setEditSurname] = useState(surname);
-  const [editEmail, setEditEmail] = useState(email);
-  const [editPhoneNum, setEditPhoneNum] = useState(phoneNum);
-  const [editEducation, setEditEducation] = useState(education);
+  const [modifiedName, setModifiedName] = useState(name);
+  const [modifiedSurname, setModifiedSurname] = useState(surname);
+  const [modifiedEmal, setModifiedEmal] = useState(email);
+  const [modifiedPhoneNum, setModifiedPhoneNum] = useState(phoneNum);
+  const [modifiedEducation, setModifiedEducation] = useState(education);
+  const [modifiedWorkExperience, setModifiedWorkExperience] =
+    useState(workExperience);
 
-  function handleEditNameChange(e) {
-    setEditName(e.target.value);
+  function handleModifiedNameChange(e) {
+    setModifiedName(e.target.value);
   }
-  function handleEditSurnameChange(e) {
-    setEditSurname(e.target.value);
+  function handleModifiedSurnameChange(e) {
+    setModifiedSurname(e.target.value);
   }
-  function handleEditEmailChange(e) {
-    setEditEmail(e.target.value);
+  function handleModifiedEmalChange(e) {
+    setModifiedEmal(e.target.value);
   }
-  function handleEditPhoneNumChange(e) {
-    setEditPhoneNum(e.target.value);
+  function handleModifiedPhoneNumChange(e) {
+    setModifiedPhoneNum(e.target.value);
   }
 
-  function handleEditEducationChange(id, modifiedProperties) {
-    setEditEducation(
-      editEducation.map((entry) => {
+  function handleModifiedEducationChange(id, modifiedProperties) {
+    setModifiedEducation(
+      modifiedEducation.map((entry) => {
         if (entry.id === id) {
           return { ...entry, ...modifiedProperties };
         } else return entry;
@@ -112,15 +68,39 @@ export default function EditForm({
     );
   }
 
+  function handleModifiedWorkExperienceChange(id, modifiedProperties) {
+    setModifiedWorkExperience(
+      modifiedWorkExperience.map((entry) => {
+        if (entry.id === id) {
+          return { ...entry, ...modifiedProperties };
+        } else return entry;
+      })
+    );
+  }
+
+  function appendWorkExperienceEntry() {
+    setModifiedWorkExperience([
+      ...modifiedWorkExperience,
+      {
+        companyName: '',
+        position: '',
+        mainResponsibilities: [{ value: '', id: 0 }],
+        startDate: '',
+        endDate: '',
+        id: modifiedWorkExperience[modifiedWorkExperience.length - 1].id + 1,
+      },
+    ]);
+  }
+
   function appendEducationEntry() {
-    setEditEducation([
-      ...editEducation,
+    setModifiedEducation([
+      ...modifiedEducation,
       {
         schoolName: '',
         titleOfStudy: '',
         startDate: '',
         endDate: '',
-        id: editEducation.length,
+        id: modifiedEducation[modifiedEducation.length - 1].id + 1,
       },
     ]);
   }
@@ -128,12 +108,15 @@ export default function EditForm({
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (name !== editName) handleNameChange(editName);
-    if (surname !== editSurname) handleSurnameChange(editSurname);
-    if (email !== editEmail) handleEmailChange(editEmail);
-    if (phoneNum !== editPhoneNum) handlePhoneNumChange(editPhoneNum);
-    if (!deepEquality(education, editEducation))
-      handleEducationChange(editEducation);
+    if (name !== modifiedName) handleNameChange(modifiedName);
+    if (surname !== modifiedSurname) handleSurnameChange(modifiedSurname);
+    if (email !== modifiedEmal) handleEmailChange(modifiedEmal);
+    if (phoneNum !== modifiedPhoneNum) handlePhoneNumChange(modifiedPhoneNum);
+    if (!deepEquality(education, modifiedEducation))
+      handleEducationChange(modifiedEducation);
+    if (!deepEquality(workExperience, modifiedWorkExperience)) {
+      handleWorkExperienceChange(modifiedWorkExperience);
+    }
 
     onSubmit();
   }
@@ -147,8 +130,8 @@ export default function EditForm({
           <input
             type='text'
             id='name'
-            value={editName}
-            onChange={handleEditNameChange}
+            value={modifiedName}
+            onChange={handleModifiedNameChange}
           />
         </label>
         <label htmlFor='surname'>
@@ -156,8 +139,8 @@ export default function EditForm({
           <input
             type='text'
             id='surname'
-            value={editSurname}
-            onChange={handleEditSurnameChange}
+            value={modifiedSurname}
+            onChange={handleModifiedSurnameChange}
           />
         </label>
         <label htmlFor='email'>
@@ -165,8 +148,8 @@ export default function EditForm({
           <input
             type='email'
             id='email'
-            value={editEmail}
-            onChange={handleEditEmailChange}
+            value={modifiedEmal}
+            onChange={handleModifiedEmalChange}
           />
         </label>
         <label htmlFor='phoneNum'>
@@ -174,25 +157,46 @@ export default function EditForm({
           <input
             type='tel'
             id='phoneNum'
-            value={editPhoneNum}
-            onChange={handleEditPhoneNumChange}
+            value={modifiedPhoneNum}
+            onChange={handleModifiedPhoneNumChange}
           />
         </label>
 
         <h2>Education</h2>
         <div className='edit-education-list'>
-          {editEducation.map((entry) => {
+          {modifiedEducation.map((entry) => {
             return (
               <EditEducationEntry
                 key={'edit-education-list-item-' + entry.id}
                 educationEntry={entry}
-                handleEditEducationChange={handleEditEducationChange}
+                handleModifiedEducationChange={handleModifiedEducationChange}
               />
             );
           })}
         </div>
         <button type='button' value='' onClick={() => appendEducationEntry()}>
           ADD EDUCATION ENTRY
+        </button>
+
+        <div className='edit-work-experience-list'>
+          {modifiedWorkExperience.map((entry) => {
+            return (
+              <EditWorkExperienceEntry
+                key={'edit-work-experience-list-item-' + entry.id}
+                workExperienceEntry={entry}
+                handleModifiedWorkExperienceChange={
+                  handleModifiedWorkExperienceChange
+                }
+              />
+            );
+          })}
+        </div>
+        <button
+          type='button'
+          value=''
+          onClick={() => appendWorkExperienceEntry()}
+        >
+          ADD WORK EXPERIENCE ENTRY
         </button>
 
         <input type='submit' value='SAVE CHANGES' />

@@ -34,9 +34,21 @@ function App() {
       companyName: 'Metadream',
       position: 'Front-end developer',
       mainResponsibilities: [
-        'Optimize code and assets to ensure fast load times and smooth performance',
-        'Utilize front-end frameworks like React to create scalable and reusable UI components',
-        'Write clean, efficient code to implement new features and functionalities based on project requirements',
+        {
+          value:
+            'Optimize code and assets to ensure fast load times and smooth performance',
+          id: 0,
+        },
+        {
+          value:
+            'Utilize front-end frameworks like React to create scalable and reusable UI components',
+          id: 1,
+        },
+        {
+          value:
+            'Write clean, efficient code to implement new features and functionalities based on project requirements',
+          id: 2,
+        },
       ],
       startDate: '2021-08-01',
       endDate: '2023-01-31',
@@ -46,12 +58,26 @@ function App() {
       companyName: 'Concurrent',
       position: 'Android Developer',
       mainResponsibilities: [
-        'Translate designs and wireframes into high quality code',
-        'Identify and correct bottlenecks and fix bugs',
-        'Ensure the best possible performance, quality, and responsiveness of the application',
+        {
+          value: 'Translate designs and wireframes into high quality code',
+          id: 0,
+        },
+        { value: 'Identify and correct bottlenecks and fix bugs', id: 1 },
+        {
+          value:
+            'Ensure the best possible performance, quality, and responsiveness of the application',
+          id: 2,
+        },
       ],
       startDate: '2023-02-01',
       id: 1,
+    },
+    {
+      companyName: 'Concurrent',
+      position: 'Team Lead',
+      mainResponsibilities: [{ value: '', id: 0 }],
+      startDate: '2024-02-01',
+      id: 2,
     },
   ]);
 
@@ -64,11 +90,13 @@ function App() {
           email={email}
           phoneNum={phoneNum}
           education={education}
+          workExperience={workExperience}
           handleNameChange={setName}
           handleSurnameChange={setSurname}
           handleEmailChange={setEmail}
           handlePhoneNumChange={setPhoneNum}
           handleEducationChange={setEducation}
+          handleWorkExperienceChange={setWorkExperience}
           onSubmit={() => setIsEditing(!isEditing)}
         />
       </>
