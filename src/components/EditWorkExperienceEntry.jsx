@@ -1,3 +1,5 @@
+import { format, parse } from 'date-fns';
+
 export default function EditWorkExperienceEntry({
   workExperienceEntry,
   handleModifiedWorkExperienceChange,
@@ -33,6 +35,8 @@ export default function EditWorkExperienceEntry({
       ],
     });
   }
+
+  console.log(`start date: ${startDate}, end date: ${endDate}`);
 
   return (
     <>
@@ -90,12 +94,17 @@ export default function EditWorkExperienceEntry({
           id='start-date'
           min='1900-01-01'
           max='2100-12-31'
-          value={startDate}
-          onChange={(e) =>
-            handleModifiedWorkExperienceChange(id, {
-              startDate: e.target.value,
-            })
+          value={
+            startDate === 'now' || startDate === ''
+              ? ''
+              : format(startDate, 'yyyy-MM-dd')
           }
+          onChange={(e) => {
+            console.log(e.target.value);
+            handleModifiedWorkExperienceChange(id, {
+              startDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
+            });
+          }}
         />
       </label>
       <label htmlFor='end-date'>
@@ -105,10 +114,17 @@ export default function EditWorkExperienceEntry({
           id='end-date'
           min='1900-01-01'
           max='2100-12-31'
-          value={endDate}
-          onChange={(e) =>
-            handleModifiedWorkExperienceChange(id, { endDate: e.target.value })
+          value={
+            endDate === 'now' || endDate === ''
+              ? ''
+              : format(endDate, 'yyyy-MM-dd')
           }
+          onChange={(e) => {
+            console.log(e.target.value);
+            handleModifiedWorkExperienceChange(id, {
+              endDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
+            });
+          }}
         />
       </label>
     </>

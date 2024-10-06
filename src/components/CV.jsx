@@ -1,11 +1,7 @@
 import { format } from 'date-fns';
 
-function formatDate(dateString) {
-  if (!dateString || dateString.length < 10) return '';
-
-  const [year, month, day] = dateString.split('-');
-  const date = new Date(year, month, day);
-
+function formatDate(date) {
+  if (!(date instanceof Date)) return '';
   return format(date, 'do MMMM y');
 }
 

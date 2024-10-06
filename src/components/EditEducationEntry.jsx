@@ -1,3 +1,5 @@
+import { format, parse } from 'date-fns';
+
 export default function EditEducationEntry({
   educationEntry,
   handleModifiedEducationChange,
@@ -35,9 +37,15 @@ export default function EditEducationEntry({
           id='start-date'
           min='1900-01-01'
           max='2100-12-31'
-          value={startDate}
+          value={
+            startDate === 'now' || startDate === ''
+              ? ''
+              : format(startDate, 'yyyy-MM-dd')
+          }
           onChange={(e) =>
-            handleModifiedEducationChange(id, { startDate: e.target.value })
+            handleModifiedEducationChange(id, {
+              startDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
+            })
           }
         />
       </label>
@@ -48,9 +56,15 @@ export default function EditEducationEntry({
           id='end-date'
           min='1900-01-01'
           max='2100-12-31'
-          value={endDate}
+          value={
+            endDate === 'now' || endDate === ''
+              ? ''
+              : format(endDate, 'yyyy-MM-dd')
+          }
           onChange={(e) =>
-            handleModifiedEducationChange(id, { endDate: e.target.value })
+            handleModifiedEducationChange(id, {
+              endDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
+            })
           }
         />
       </label>
