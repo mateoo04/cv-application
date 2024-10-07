@@ -2,6 +2,7 @@ import { format, isValid, parse } from 'date-fns';
 import TextAreaAutosize from 'react-textarea-autosize';
 
 export default function EditWorkExperienceEntry({
+  generateId,
   workExperienceEntry,
   handleModifiedWorkExperienceChange,
   moveUp,
@@ -44,15 +45,17 @@ export default function EditWorkExperienceEntry({
 
   return (
     <div className='edit-work-experience-entry'>
-      <button type='button' onClick={moveUp}>
-        MOVE UP
-      </button>
-      <button type='button' onClick={moveDown}>
-        MOVE DOWN
-      </button>
-      <button type='button' onClick={removeEntry}>
-        DELETE
-      </button>
+      <div className='entry-buttons'>
+        <button className='entry-button' type='button' onClick={moveUp}>
+          <img src='../../public/chevron-up.svg' alt='' />
+        </button>
+        <button className='entry-button' type='button' onClick={moveDown}>
+          <img src='../../public/chevron-down.svg' alt='' />
+        </button>
+        <button className='entry-button' type='button' onClick={removeEntry}>
+          <img src='../../public/trash.svg' alt='' />
+        </button>
+      </div>
       <div className='date-pickers'>
         <label htmlFor='start-date'>
           Start date

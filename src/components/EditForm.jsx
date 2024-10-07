@@ -290,7 +290,7 @@ export default function EditForm({
           Sort from most recent
         </label>
         <div className='edit-work-experience-list'>
-          {modifiedWorkExperience.map((entry) => {
+          {modifiedWorkExperience.map((entry, index) => {
             return (
               <EditWorkExperienceEntry
                 generateId={generateId}
@@ -316,7 +316,11 @@ export default function EditForm({
                   )
                 }
                 removeEntry={() =>
-                  removeEntry(modifiedEducation, setModifiedEducation, index)
+                  removeEntry(
+                    modifiedWorkExperience,
+                    setModifiedWorkExperience,
+                    index
+                  )
                 }
               />
             );

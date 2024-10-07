@@ -82,6 +82,21 @@ input[type='date'],
   width: min(300px, 80%);
 }
 
+.entry-button {
+  width: 26px;
+  height: 26px;
+  background-color: #363636;
+  border-radius: 50%;
+  box-sizing: border-box;
+  padding-top: 4px;
+  border: 1px solid #363636;
+}
+
+.entry-buttons {
+  display: flex;
+  gap: 5px;
+}
+
 form ul {
   padding-inline-start: 10px;
   list-style-type: none;
@@ -107,9 +122,11 @@ form > button {
   width: 100%;
 }
 
-button,
-input[type='submit'] {
+button:hover,
+input[type='submit']:hover,
+.entry-button:hover {
   cursor: pointer;
+  opacity: 0.9;
 }
 
 .date-pickers {
