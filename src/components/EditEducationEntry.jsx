@@ -3,11 +3,23 @@ import { format, isValid, parse } from 'date-fns';
 export default function EditEducationEntry({
   educationEntry,
   handleModifiedEducationChange,
+  moveUp,
+  moveDown,
+  removeEntry,
 }) {
   const { schoolName, titleOfStudy, startDate, endDate, id } = educationEntry;
 
   return (
     <div className='edit-education-entry'>
+      <button type='button' onClick={moveUp}>
+        MOVE UP
+      </button>
+      <button type='button' onClick={moveDown}>
+        MOVE DOWN
+      </button>
+      <button type='button' onClick={removeEntry}>
+        DELETE
+      </button>
       <div className='date-pickers'>
         <label htmlFor='start-date'>
           Start date
@@ -51,6 +63,7 @@ export default function EditEducationEntry({
       <label htmlFor='school-name'>
         School name
         <input
+          required
           type='text'
           id='school-name'
           value={schoolName}
@@ -62,6 +75,7 @@ export default function EditEducationEntry({
       <label htmlFor='study-title'>
         Title of Study
         <input
+          required
           type='text'
           id='study-title'
           value={titleOfStudy}

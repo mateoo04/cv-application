@@ -6,6 +6,13 @@ function formatDate(date) {
   return format(date, 'd MMMM y');
 }
 
+function getDateInterval(startDate, endDate) {
+  if (startDate !== '' || endDate !== '')
+    return <p>{formatDate(startDate) + ' - ' + formatDate(endDate)}</p>;
+
+  return null;
+}
+
 export default function CV({
   fullName,
   email,
@@ -29,11 +36,7 @@ export default function CV({
         {education.map((entry) => {
           return (
             <div className='item' key={'education-list-item-' + entry.id}>
-              <p>
-                {formatDate(entry.startDate) +
-                  ' - ' +
-                  formatDate(entry.endDate)}
-              </p>
+              {getDateInterval(entry.startDate, entry.endDate)}
               <p>
                 <span style={{ fontWeight: 'bold' }}>{entry.schoolName}</span>,
                 {' ' + entry.titleOfStudy}
@@ -47,11 +50,7 @@ export default function CV({
         {workExperience.map((entry) => {
           return (
             <div className='item' key={'work-experience-list-item-' + entry.id}>
-              <p>
-                {formatDate(entry.startDate) +
-                  ' - ' +
-                  formatDate(entry.endDate)}
-              </p>
+              {getDateInterval(entry.startDate, entry.endDate)}
               <p>
                 <span style={{ fontWeight: 'bold' }}>{entry.position}</span>,
                 {' ' + entry.companyName}

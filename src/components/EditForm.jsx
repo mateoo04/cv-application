@@ -44,6 +44,30 @@ const sortFromNewestToOldest = (a, b) => {
   else if (!older) return -1;
 };
 
+function move(array, handlingFunction, index, direction) {
+  //direction is -1 for moving the item up in the araay and +1 for moving it further down
+  const newArray = [...array];
+
+  if (
+    (index > 0 && direction === -1) ||
+    (index !== array.length - 1 && direction === 1)
+  ) {
+    [newArray[index], newArray[index + direction]] = [
+      newArray[index + direction],
+      newArray[index],
+    ];
+  } else return;
+
+  handlingFunction(newArray);
+}
+
+function removeEntry(array, handlingFunction, index) {
+  const newArray = [...array];
+  newArray.splice(index, 1);
+
+  handlingFunction(newArray);
+}
+
 export default function EditForm({
   generateId,
   sortEducation,
@@ -171,7 +195,7 @@ export default function EditForm({
       <form onSubmit={handleSubmit}>
         <div className='general-information'>
           <label htmlFor='name'>
-            Name
+            Name*
             <input
               required
               type='text'
@@ -181,7 +205,7 @@ export default function EditForm({
             />
           </label>
           <label htmlFor='surname'>
-            Surname
+            Surname*
             <input
               required
               type='text'
@@ -191,7 +215,7 @@ export default function EditForm({
             />
           </label>
           <label htmlFor='email'>
-            Email
+            Email*
             <input
               required
               type='email'
@@ -226,13 +250,22 @@ export default function EditForm({
           Sort from most recent
         </label>
         <div className='edit-education-list'>
-          {modifiedEducation.map((entry) => {
+          {modifiedEducation.map((entry, index) => {
             return (
               <EditEducationEntry
                 generateId={generateId}
                 key={'edit-education-list-item-' + entry.id}
                 educationEntry={entry}
                 handleModifiedEducationChange={handleModifiedEducationChange}
+                moveUp={() =>
+                  move(modifiedEducation, setModifiedEducation, index, -1)
+                }
+                moveDown={() =>
+                  move(modifiedEducation, setModifiedEducation, index, 1)
+                }
+                removeEntry={() =>
+                  removeEntry(modifiedEducation, setModifiedEducation, index)
+                }
               />
             );
           })}
@@ -265,6 +298,25 @@ export default function EditForm({
                 workExperienceEntry={entry}
                 handleModifiedWorkExperienceChange={
                   handleModifiedWorkExperienceChange
+                }
+                moveUp={() =>
+                  move(
+                    modifiedWorkExperience,
+                    setModifiedWorkExperience,
+                    index,
+                    -1
+                  )
+                }
+                moveDown={() =>
+                  move(
+                    modifiedWorkExperience,
+                    setModifiedWorkExperience,
+                    index,
+                    1
+                  )
+                }
+                removeEntry={() =>
+                  removeEntry(modifiedEducation, setModifiedEducation, index)
                 }
               />
             );

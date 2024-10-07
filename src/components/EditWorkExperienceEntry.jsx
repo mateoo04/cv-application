@@ -4,6 +4,9 @@ import TextAreaAutosize from 'react-textarea-autosize';
 export default function EditWorkExperienceEntry({
   workExperienceEntry,
   handleModifiedWorkExperienceChange,
+  moveUp,
+  moveDown,
+  removeEntry,
 }) {
   const {
     companyName,
@@ -41,6 +44,15 @@ export default function EditWorkExperienceEntry({
 
   return (
     <div className='edit-work-experience-entry'>
+      <button type='button' onClick={moveUp}>
+        MOVE UP
+      </button>
+      <button type='button' onClick={moveDown}>
+        MOVE DOWN
+      </button>
+      <button type='button' onClick={removeEntry}>
+        DELETE
+      </button>
       <div className='date-pickers'>
         <label htmlFor='start-date'>
           Start date
@@ -84,6 +96,7 @@ export default function EditWorkExperienceEntry({
       <label htmlFor='company-name'>
         Company name
         <input
+          required
           type='text'
           id='company-name'
           value={companyName}
@@ -97,6 +110,7 @@ export default function EditWorkExperienceEntry({
       <label htmlFor='position'>
         Position
         <input
+          required
           type='text'
           id='position'
           value={position}
