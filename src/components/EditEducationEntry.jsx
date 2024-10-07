@@ -42,25 +42,39 @@ export default function EditEducationEntry({
             }
           />
         </label>
-        <label htmlFor='end-date'>
-          End date
-          <input
-            type='date'
-            id='end-date'
-            min='1900-01-01'
-            max='2100-12-31'
-            value={
-              endDate === 'now' || endDate === '' || !isValid(endDate)
-                ? ''
-                : format(endDate, 'yyyy-MM-dd')
-            }
-            onChange={(e) =>
-              handleModifiedEducationChange(id, {
-                endDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
-              })
-            }
-          />
-        </label>
+        <div className='end-date-container'>
+          <label htmlFor='end-date'>
+            End date
+            <input
+              type='date'
+              id='end-date'
+              min='1900-01-01'
+              max='2100-12-31'
+              value={
+                endDate === 'now' || endDate === '' || !isValid(endDate)
+                  ? ''
+                  : format(endDate, 'yyyy-MM-dd')
+              }
+              onChange={(e) =>
+                handleModifiedEducationChange(id, {
+                  endDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
+                })
+              }
+            />
+          </label>
+          <label htmlFor='ongoing-checkbox' className='ongoing-checkbox-label'>
+            <input
+              type='checkbox'
+              checked={endDate === 'ongoing'}
+              onChange={(e) =>
+                handleModifiedEducationChange(id, {
+                  endDate: e.target.checked ? 'ongoing' : '',
+                })
+              }
+            />
+            Ongoing
+          </label>
+        </div>
       </div>
       <label htmlFor='school-name'>
         School name

@@ -24,24 +24,27 @@ function deepEquality(firstArray, secondArray) {
 }
 
 function isOlder(first, second) {
+  if (first.endDate === 'ongoing' && second.endDate === 'ongoing') {
+    return isBefore(first.startDate, second.startDate);
+  } else if (first.endDate === 'ongoing') return false;
+  else if (second.endDate === 'ongoing') return true;
+
   if (first.endDate !== '' && second.endDate !== '') {
     return isBefore(first.endDate, second.endDate);
   } else if (first.endDate === '' && second.endDate === '') {
-    return isBefore(first.startDate, second.endDate);
+    return isBefore(first.startDate, second.startDate);
   } else if (first.endDate !== '' && second.endDate === '') {
     return isBefore(first.endDate, second.startDate);
   } else if (first.endDate === '' && second.endDate !== '') {
     return isBefore(first.startDate, second.endDate);
   }
-
-  return 0;
 }
 
 const sortFromNewestToOldest = (a, b) => {
-  const older = isOlder(a, b);
-  if (older === 0) return 0;
-  else if (older) return 1;
-  else if (!older) return -1;
+  if (isOlder(a, b)) return 1;
+  else if (isOlder(b, a)) return -1;
+
+  return 0;
 };
 
 function move(array, handlingFunction, index, direction) {
@@ -90,7 +93,7 @@ export default function EditForm({
 }) {
   const [modifiedName, setModifiedName] = useState(name);
   const [modifiedSurname, setModifiedSurname] = useState(surname);
-  const [modifiedEmal, setModifiedEmal] = useState(email);
+  const [modifiedEmail, setModifiedEmail] = useState(email);
   const [modifiedPhoneNum, setModifiedPhoneNum] = useState(phoneNum);
   const [modifiedEducation, setModifiedEducation] = useState(education);
   const [modifiedWorkExperience, setModifiedWorkExperience] =
@@ -100,14 +103,47 @@ export default function EditForm({
   const [modifiedSortWorkExperience, setModifiedSortWorkExperience] =
     useState(sortWorkExperience);
 
+  function clearAllFields() {
+    setModifiedName('');
+    setModifiedSurname('');
+    setModifiedEmail('');
+    setModifiedPhoneNum('');
+    setModifiedEducation([
+      {
+        schoolName: '',
+        titleOfStudy: '',
+        startDate: '',
+        endDate: '',
+        id: generateId(),
+      },
+    ]);
+    setModifiedWorkExperience([
+      {
+        companyName: '',
+        position: '',
+        mainResponsibilities: [
+          {
+            value: '',
+            id: generateId(),
+          },
+        ],
+        startDate: '',
+        endDate: '',
+        id: generateId(),
+      },
+    ]);
+    setModifiedSortEducation(false);
+    setModifiedSortWorkExperience(false);
+  }
+
   function handleModifiedNameChange(e) {
     setModifiedName(e.target.value);
   }
   function handleModifiedSurnameChange(e) {
     setModifiedSurname(e.target.value);
   }
-  function handleModifiedEmalChange(e) {
-    setModifiedEmal(e.target.value);
+  function handleModifiedEmailChange(e) {
+    setModifiedEmail(e.target.value);
   }
   function handleModifiedPhoneNumChange(e) {
     setModifiedPhoneNum(e.target.value);
@@ -165,7 +201,7 @@ export default function EditForm({
 
     if (name !== modifiedName) handleNameChange(modifiedName);
     if (surname !== modifiedSurname) handleSurnameChange(modifiedSurname);
-    if (email !== modifiedEmal) handleEmailChange(modifiedEmal);
+    if (email !== modifiedEmail) handleEmailChange(modifiedEmail);
     if (phoneNum !== modifiedPhoneNum) handlePhoneNumChange(modifiedPhoneNum);
     if (
       !deepEquality(education, modifiedEducation) ||
@@ -192,6 +228,9 @@ export default function EditForm({
   return (
     <>
       <h1>Editing Mode</h1>
+      <button className='clear-button' onClick={clearAllFields}>
+        CLEAR ALL FIELDS
+      </button>
       <form onSubmit={handleSubmit}>
         <div className='general-information'>
           <label htmlFor='name'>
@@ -220,8 +259,8 @@ export default function EditForm({
               required
               type='email'
               id='email'
-              value={modifiedEmal}
-              onChange={handleModifiedEmalChange}
+              value={modifiedEmail}
+              onChange={handleModifiedEmailChange}
             />
           </label>
           <label htmlFor='phoneNum'>

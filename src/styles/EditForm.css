@@ -28,7 +28,8 @@ label > input {
 .edit-button,
 form > button,
 .finish-editing-buttons button:first-child,
-input[type='submit'] {
+input[type='submit'],
+.clear-button {
   background-color: #363636;
   color: #fff;
   padding: 8px 20px;
@@ -132,6 +133,17 @@ input[type='submit']:hover,
 .date-pickers {
   display: flex;
   gap: 10px;
+}
+
+.end-date-container {
+  display: flex;
+  align-items: end;
+}
+
+.ongoing-checkbox-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .add-responsibility {

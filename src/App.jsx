@@ -44,16 +44,13 @@ function App() {
   const [workExperience, setWorkExperience] = useState([
     {
       companyName: 'Concurrent',
-      position: 'Team Lead',
-      mainResponsibilities: [{ value: '', id: generateId() }],
-      startDate: new Date(2024, 7, 8),
-      endDate: 'now',
-      id: generateId(),
-    },
-    {
-      companyName: 'Concurrent',
       position: 'Android Developer',
       mainResponsibilities: [
+        {
+          value:
+            'Ensure the application meets design guidelines and user experience standards, providing a seamless interface across devices',
+          id: generateId(),
+        },
         {
           value: 'Translate designs and wireframes into high quality code',
           id: generateId(),
@@ -67,9 +64,14 @@ function App() {
             'Ensure the best possible performance, quality, and responsiveness of the application',
           id: generateId(),
         },
+        {
+          value:
+            'Unit-test code for robustness, including edge cases, usability, and general reliability',
+          id: generateId(),
+        },
       ],
-      startDate: new Date(2023, 1, 2),
-      endDate: 'now',
+      startDate: new Date(2023, 1, 4),
+      endDate: 'ongoing',
       id: generateId(),
     },
     {

@@ -8,7 +8,13 @@ function formatDate(date) {
 
 function getDateInterval(startDate, endDate) {
   if (startDate !== '' || endDate !== '')
-    return <p>{formatDate(startDate) + ' - ' + formatDate(endDate)}</p>;
+    return (
+      <p>
+        {formatDate(startDate) +
+          ' - ' +
+          (endDate === 'ongoing' ? 'Present' : formatDate(endDate))}
+      </p>
+    );
 
   return null;
 }
