@@ -16,16 +16,23 @@ function App() {
     {
       schoolName: 'Dowing High School',
       titleOfStudy: 'Mathematical High School',
-      startDate: new Date(2014, 9, 1),
-      endDate: new Date(2017, 6, 30),
+      startDate: new Date(2014, 8, 1),
+      endDate: new Date(2017, 5, 30),
       id: 0,
     },
     {
       schoolName: 'Technical University of Zagreb',
       titleOfStudy: "Computer Science Bacherlor's",
-      startDate: new Date(2017, 10, 1),
-      endDate: new Date(2021, 7, 15),
+      startDate: new Date(2017, 9, 1),
+      endDate: new Date(2020, 6, 15),
       id: 1,
+    },
+    {
+      schoolName: 'Technical University of Zagreb',
+      titleOfStudy: "Computer Science Master's",
+      startDate: new Date(2020, 9, 1),
+      endDate: new Date(2022, 6, 15),
+      id: 2,
     },
   ]);
 
@@ -50,8 +57,8 @@ function App() {
           id: 2,
         },
       ],
-      startDate: new Date(2021, 8, 1),
-      endDate: new Date(2023, 1, 31),
+      startDate: new Date(2021, 7, 1),
+      endDate: new Date(2023, 0, 31),
       id: 0,
     },
     {
@@ -69,7 +76,7 @@ function App() {
           id: 2,
         },
       ],
-      startDate: new Date(2023, 2, 1),
+      startDate: new Date(2023, 1, 2),
       endDate: 'now',
       id: 1,
     },
@@ -77,7 +84,7 @@ function App() {
       companyName: 'Concurrent',
       position: 'Team Lead',
       mainResponsibilities: [{ value: '', id: 0 }],
-      startDate: new Date(2024, 2, 1),
+      startDate: new Date(2024, 7, 8),
       endDate: 'now',
       id: 2,
     },
@@ -106,7 +113,9 @@ function App() {
   }
   return (
     <>
-      <button onClick={() => setIsEditing(!isEditing)}>EDIT</button>
+      <button className='edit-button' onClick={() => setIsEditing(!isEditing)}>
+        EDIT
+      </button>
       <CV
         fullName={name + ' ' + surname}
         email={email}

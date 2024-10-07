@@ -123,44 +123,46 @@ export default function EditForm({
 
   return (
     <>
-      <h1>Editing</h1>
+      <h1>Editing Mode</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='name'>
-          Name
-          <input
-            type='text'
-            id='name'
-            value={modifiedName}
-            onChange={handleModifiedNameChange}
-          />
-        </label>
-        <label htmlFor='surname'>
-          Surname
-          <input
-            type='text'
-            id='surname'
-            value={modifiedSurname}
-            onChange={handleModifiedSurnameChange}
-          />
-        </label>
-        <label htmlFor='email'>
-          Email
-          <input
-            type='email'
-            id='email'
-            value={modifiedEmal}
-            onChange={handleModifiedEmalChange}
-          />
-        </label>
-        <label htmlFor='phoneNum'>
-          Phone number
-          <input
-            type='tel'
-            id='phoneNum'
-            value={modifiedPhoneNum}
-            onChange={handleModifiedPhoneNumChange}
-          />
-        </label>
+        <div className='general-information'>
+          <label htmlFor='name'>
+            Name
+            <input
+              type='text'
+              id='name'
+              value={modifiedName}
+              onChange={handleModifiedNameChange}
+            />
+          </label>
+          <label htmlFor='surname'>
+            Surname
+            <input
+              type='text'
+              id='surname'
+              value={modifiedSurname}
+              onChange={handleModifiedSurnameChange}
+            />
+          </label>
+          <label htmlFor='email'>
+            Email
+            <input
+              type='email'
+              id='email'
+              value={modifiedEmal}
+              onChange={handleModifiedEmalChange}
+            />
+          </label>
+          <label htmlFor='phoneNum'>
+            Phone number
+            <input
+              type='tel'
+              id='phoneNum'
+              value={modifiedPhoneNum}
+              onChange={handleModifiedPhoneNumChange}
+            />
+          </label>
+        </div>
 
         <h2>Education</h2>
         <div className='edit-education-list'>
@@ -178,6 +180,7 @@ export default function EditForm({
           ADD EDUCATION ENTRY
         </button>
 
+        <h2>Work Experience</h2>
         <div className='edit-work-experience-list'>
           {modifiedWorkExperience.map((entry) => {
             return (
@@ -199,10 +202,12 @@ export default function EditForm({
           ADD WORK EXPERIENCE ENTRY
         </button>
 
-        <input type='submit' value='SAVE CHANGES' />
-        <button type='button' onClick={onDone}>
-          CANCEL
-        </button>
+        <div className='finish-editing-buttons'>
+          <input type='submit' value='SAVE CHANGES' />
+          <button type='button' onClick={onDone}>
+            CANCEL
+          </button>
+        </div>
       </form>
     </>
   );

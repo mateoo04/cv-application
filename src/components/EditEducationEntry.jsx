@@ -7,7 +7,47 @@ export default function EditEducationEntry({
   const { schoolName, titleOfStudy, startDate, endDate, id } = educationEntry;
 
   return (
-    <>
+    <div className='edit-education-entry'>
+      <div className='date-pickers'>
+        <label htmlFor='start-date'>
+          Start date
+          <input
+            type='date'
+            id='start-date'
+            min='1900-01-01'
+            max='2100-12-31'
+            value={
+              startDate === 'now' || startDate === ''
+                ? ''
+                : format(startDate, 'yyyy-MM-dd')
+            }
+            onChange={(e) =>
+              handleModifiedEducationChange(id, {
+                startDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
+              })
+            }
+          />
+        </label>
+        <label htmlFor='end-date'>
+          End date
+          <input
+            type='date'
+            id='end-date'
+            min='1900-01-01'
+            max='2100-12-31'
+            value={
+              endDate === 'now' || endDate === ''
+                ? ''
+                : format(endDate, 'yyyy-MM-dd')
+            }
+            onChange={(e) =>
+              handleModifiedEducationChange(id, {
+                endDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
+              })
+            }
+          />
+        </label>
+      </div>
       <label htmlFor='school-name'>
         School name
         <input
@@ -30,44 +70,6 @@ export default function EditEducationEntry({
           }
         />
       </label>
-      <label htmlFor='start-date'>
-        Start date
-        <input
-          type='date'
-          id='start-date'
-          min='1900-01-01'
-          max='2100-12-31'
-          value={
-            startDate === 'now' || startDate === ''
-              ? ''
-              : format(startDate, 'yyyy-MM-dd')
-          }
-          onChange={(e) =>
-            handleModifiedEducationChange(id, {
-              startDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
-            })
-          }
-        />
-      </label>
-      <label htmlFor='end-date'>
-        End date
-        <input
-          type='date'
-          id='end-date'
-          min='1900-01-01'
-          max='2100-12-31'
-          value={
-            endDate === 'now' || endDate === ''
-              ? ''
-              : format(endDate, 'yyyy-MM-dd')
-          }
-          onChange={(e) =>
-            handleModifiedEducationChange(id, {
-              endDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
-            })
-          }
-        />
-      </label>
-    </>
+    </div>
   );
 }

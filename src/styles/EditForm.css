@@ -1,3 +1,11 @@
+@media (min-width: 500px) {
+  .general-information {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 0;
+  }
+}
+
 label {
   display: flex;
   gap: 2px;
@@ -6,4 +14,114 @@ label {
   text-transform: uppercase;
   font-size: 0.8em;
   padding: 4px;
+}
+
+label > input {
+  margin-top: 2px;
+}
+
+.edit-button,
+form > button,
+.finish-editing-buttons button:first-child,
+input[type='submit'] {
+  background-color: #363636;
+  color: #fff;
+  padding: 8px 20px;
+  border: 0;
+  border-radius: 20px;
+}
+
+.finish-editing-buttons button:nth-child(2) {
+  background-color: #eeeeee;
+  color: #363636;
+  padding: 8px 20px;
+  border: 0;
+  border-radius: 20px;
+}
+
+.finish-editing-buttons {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.finish-editing-buttons * {
+  font-weight: bold;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='date'],
+.responsibility-textarea {
+  border-radius: 18px;
+  border: 0;
+  background-color: #eeeeee;
+  padding: 6px 10px;
+}
+
+.edit-education-entry,
+.edit-work-experience-entry {
+  margin: 14px 0;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 2px solid #eeeeee;
+  border-radius: 16px;
+}
+
+.edit-education-entry input[type='text'],
+.edit-work-experience-entry input[type='text'] {
+  width: min(300px, 80%);
+}
+
+ul {
+  padding-inline-start: 10px;
+  list-style-type: none;
+  margin: 4px 0;
+}
+
+ul .responsibility-textarea {
+  max-width: 400px;
+}
+
+.edit-list-container {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  width: max(300px, 80%);
+}
+
+.edit-list-container button {
+  margin-bottom: 10px;
+}
+
+form > button {
+  width: 100%;
+}
+
+button,
+input[type='submit'] {
+  cursor: pointer;
+}
+
+.date-pickers {
+  display: flex;
+  gap: 10px;
+}
+
+.add-responsibility {
+  width: 26px;
+  height: 26px;
+  background-color: #363636;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+li input {
+  text-wrap: wrap;
 }
