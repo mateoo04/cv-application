@@ -1,4 +1,4 @@
-import { format, parse } from 'date-fns';
+import { format, isValid, parse } from 'date-fns';
 
 export default function EditEducationEntry({
   educationEntry,
@@ -17,7 +17,7 @@ export default function EditEducationEntry({
             min='1900-01-01'
             max='2100-12-31'
             value={
-              startDate === 'now' || startDate === ''
+              startDate === 'now' || startDate === '' || !isValid(startDate)
                 ? ''
                 : format(startDate, 'yyyy-MM-dd')
             }
@@ -36,7 +36,7 @@ export default function EditEducationEntry({
             min='1900-01-01'
             max='2100-12-31'
             value={
-              endDate === 'now' || endDate === ''
+              endDate === 'now' || endDate === '' || !isValid(endDate)
                 ? ''
                 : format(endDate, 'yyyy-MM-dd')
             }

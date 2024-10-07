@@ -1,4 +1,4 @@
-import { format, parse } from 'date-fns';
+import { format, isValid, parse } from 'date-fns';
 import TextAreaAutosize from 'react-textarea-autosize';
 
 export default function EditWorkExperienceEntry({
@@ -26,18 +26,18 @@ export default function EditWorkExperienceEntry({
   }
 
   function addResponsibilityItem() {
+    if (mainResponsibilities.some((item) => item.value === '')) return false;
+
     handleModifiedWorkExperienceChange(id, {
       mainResponsibilities: [
         ...mainResponsibilities,
         {
           value: '',
-          id: mainResponsibilities[mainResponsibilities.length - 1].id + 1,
+          id: generateId(),
         },
       ],
     });
   }
-
-  console.log(`start date: ${startDate}, end date: ${endDate}`);
 
   return (
     <div className='edit-work-experience-entry'>
@@ -50,12 +50,11 @@ export default function EditWorkExperienceEntry({
             min='1900-01-01'
             max='2100-12-31'
             value={
-              startDate === 'now' || startDate === ''
+              startDate === 'now' || startDate === '' || !isValid(startDate)
                 ? ''
                 : format(startDate, 'yyyy-MM-dd')
             }
             onChange={(e) => {
-              console.log(e.target.value);
               handleModifiedWorkExperienceChange(id, {
                 startDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
               });
@@ -70,12 +69,11 @@ export default function EditWorkExperienceEntry({
             min='1900-01-01'
             max='2100-12-31'
             value={
-              endDate === 'now' || endDate === ''
+              endDate === 'now' || endDate === '' || !isValid(endDate)
                 ? ''
                 : format(endDate, 'yyyy-MM-dd')
             }
             onChange={(e) => {
-              console.log(e.target.value);
               handleModifiedWorkExperienceChange(id, {
                 endDate: parse(e.target.value, 'yyyy-MM-dd', new Date()),
               });

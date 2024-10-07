@@ -1,8 +1,8 @@
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 import '../styles/CV.css';
 
 function formatDate(date) {
-  if (!(date instanceof Date)) return '';
+  if (!(date instanceof Date) || !isValid(date)) return '';
   return format(date, 'd MMMM y');
 }
 
