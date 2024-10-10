@@ -1,5 +1,7 @@
 import { format, isValid } from 'date-fns';
 import '../styles/CV.css';
+import envelopeIcon from '../assets/envelope.svg';
+import phoneIcon from '../assets/phone.svg';
 
 function formatDate(date) {
   if (!(date instanceof Date) || !isValid(date)) return '';
@@ -30,11 +32,11 @@ export default function CV({
     <div className='cv-element'>
       <h1>{fullName}</h1>
       <div className='email-container'>
-        <img src='../../public/envelope.svg' className='icon' alt='' />
+        <img src={envelopeIcon} className='icon' alt='' />
         <p>{email}</p>
       </div>
       <div className='phone-number-container'>
-        <img src='../../public/phone.svg' className='icon' alt='' />
+        <img src={phoneIcon} className='icon' alt='' />
         <p>{phoneNum}</p>
       </div>
       <h2>Education</h2>

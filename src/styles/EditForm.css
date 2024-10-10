@@ -83,7 +83,7 @@ input[type='date'],
   width: min(300px, 80%);
 }
 
-.entry-button {
+.entry-buttons button {
   width: 26px;
   height: 26px;
   background-color: #363636;

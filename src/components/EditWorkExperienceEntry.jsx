@@ -1,5 +1,6 @@
 import { format, isValid, parse } from 'date-fns';
 import TextAreaAutosize from 'react-textarea-autosize';
+import EditEntryButtons from './EditEntryButtons.jsx';
 
 export default function EditWorkExperienceEntry({
   generateId,
@@ -45,17 +46,11 @@ export default function EditWorkExperienceEntry({
 
   return (
     <div className='edit-work-experience-entry'>
-      <div className='entry-buttons'>
-        <button className='entry-button' type='button' onClick={moveUp}>
-          <img src='../../public/chevron-up.svg' alt='' />
-        </button>
-        <button className='entry-button' type='button' onClick={moveDown}>
-          <img src='../../public/chevron-down.svg' alt='' />
-        </button>
-        <button className='entry-button' type='button' onClick={removeEntry}>
-          <img src='../../public/trash.svg' alt='' />
-        </button>
-      </div>
+      <EditEntryButtons
+        moveUp={moveUp}
+        moveDown={moveDown}
+        removeEntry={removeEntry}
+      />
       <div className='date-pickers'>
         <label htmlFor='start-date'>
           Start date
